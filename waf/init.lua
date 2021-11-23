@@ -175,3 +175,23 @@ function post_attack_check()
     return false
 end
 
+--allow entry
+function entry_attack_check()
+    if config_entry_check == "on" then
+        local ENTRY_RULES = get_rule('entry.rule')
+        local REQ_URI = ngx.var.request_uri
+        for _,rule in pairs(ENTRY_RULES) do
+            if rule ~="" and rulematch(REQ_URI,rule,"jo") then
+                --log_record('Allow_ENTRY',REQ_URI,"-",rule)   
+                return false
+            else
+                log_record('Deny_ENTRY',REQ_URI,"-",rule)
+                if config_waf_enable == "on" then
+                        waf_output()
+                        return true
+                        end
+            end
+        end
+    end
+    return false
+end
