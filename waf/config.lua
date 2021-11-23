@@ -26,6 +26,8 @@ config_cc_check = "on"
 config_cc_rate = "10/60"
 --enable/disable post filtering
 config_post_check = "on"
+--enable/disable entry filtering
+config_entry_attack_check = "on"
 --config waf output redirect/html
 config_waf_output = "html"
 --if config_waf_output ,setting url
